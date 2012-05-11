@@ -4,6 +4,7 @@ class Admin::RelationsController < Admin::BaseController
   respond_to :js
 
   def create
+    # binding.pry
     @relation = Relation.new(params[:relation])
     @relation.relatable = @product
     @relation.related_to = Variant.find(params[:relation][:related_to_id]).product
@@ -22,7 +23,7 @@ class Admin::RelationsController < Admin::BaseController
   private
 
     def load_data
-      @product = Product.find_by_permalink(params[:product_id])
+      @product = Product.find_by_permalink(params[:product_id] || params[:assembly_id])
     end
 
 end

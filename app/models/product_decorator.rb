@@ -10,8 +10,8 @@ Product.class_eval do
     begin
       relation_type =  self.class.relation_types.detect { |rt| rt.name.downcase.gsub(" ", "_").pluralize == method.to_s.downcase }
     rescue ActiveRecord::StatementInvalid => error
-      # This exception is throw if the relation_types table does not exist. 
-      # And this method is getting invoked during the execution of a migration 
+      # This exception is throw if the relation_types table does not exist.
+      # And this method is getting invoked during the execution of a migration
       # from another extension when both are used in a project.
       relation_type = nil
     end
@@ -23,7 +23,7 @@ Product.class_eval do
       super
     else
       relations.find_all_by_relation_type_id(relation_type.id).map(&:related_to).select do |product|
-        product.deleted_at.nil? && product.available_on &&  product.available_on <= Time.now()
+        product.deleted_at.nil?# && product.available_on &&  product.available_on <= Time.now()
       end
     end
 
