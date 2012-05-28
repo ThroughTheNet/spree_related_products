@@ -23,7 +23,7 @@ Product.class_eval do
       super
     else
       relations.find_all_by_relation_type_id(relation_type.id).map(&:related_to).select do |product|
-        product.deleted_at.nil?# && product.available_on &&  product.available_on <= Time.now()
+        product.deleted_at.nil? && product.part == false # && product.available_on &&  product.available_on <= Time.now()
       end
     end
 
