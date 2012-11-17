@@ -23,7 +23,7 @@ class Admin::RelationsController < Admin::BaseController
   private
 
     def load_data
-      @product = Product.find_by_permalink(params[:product_id] || params[:assembly_id])
+      @product = Product.find_by_permalink(params[:product_id])
     end
 
 end
